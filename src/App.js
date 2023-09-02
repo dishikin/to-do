@@ -1,25 +1,62 @@
-import logo from './logo.svg';
-import './App.css';
+import { useState } from "react";
+
+function ToDo ({value}) {
+    return(
+        <li>
+            {value}
+        </li>
+    )
+}
+
+function ToDos ({toDoList}) {
+
+    const renderToDo = (i) => {
+        // console.log("i" + i)
+        // console.log("toDoList[i]" + toDoList[i])
+        // console.log(toDoList[1])
+        return(
+            <ToDo 
+            key={i}
+            value={toDoList[i]}
+            />
+        )
+    }
+
+
+    return (
+        <>
+            {[...Array(3).keys()].map((i) => (
+                renderToDo(i)
+                ))}
+        </>
+    )
+}
 
 function App() {
-  return (
+    const [toDoIndex, setToDoIndex] = useState(0)
+    const [toDoList, setToDoList] = useState(Array(3).fill(""))
+
+    const handleAddToDo = () => {
+        if (toDoIndex === 2) {
+            setToDoIndex(0)
+        }
+        let currentList = toDoList.slice()
+        currentList[toDoIndex] = "hello"
+        setToDoList(currentList)
+        setToDoIndex(toDoIndex+1)
+    }
+
+    return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+        <button className="addToDo" onClick={handleAddToDo}>
+            Add ToDo
+        </button>
+        <input type="text"></input>
+        <ul>
+            <ToDos toDoList={toDoList}/>
+        </ul>
     </div>
-  );
+);
 }
 
 export default App;
