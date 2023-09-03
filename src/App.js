@@ -1,61 +1,22 @@
 import { useState } from "react";
-
-function ToDo ({value}) {
-    return(
-        <li>
-            {value}
-        </li>
-    )
-}
-
-function ToDos ({toDoList}) {
-
-    const renderToDo = (i) => {
-        // console.log("i" + i)
-        // console.log("toDoList[i]" + toDoList[i])
-        // console.log(toDoList[1])
-        return(
-            <ToDo 
-            key={i}
-            value={toDoList[i]}
-            />
-        )
-    }
-
-
-    return (
-        <>
-            {[...Array(3).keys()].map((i) => (
-                renderToDo(i)
-                ))}
-        </>
-    )
-}
+import AddTodo from "./AddTodo.jsx";
+import TodoList from "./TodoList.jsx";
+import "./App.css";
 
 function App() {
-    const [toDoIndex, setToDoIndex] = useState(0)
-    const [toDoList, setToDoList] = useState(Array(3).fill(""))
-
-    const handleAddToDo = () => {
-        if (toDoIndex === 2) {
-            setToDoIndex(0)
-        }
-        let currentList = toDoList.slice()
-        currentList[toDoIndex] = "hello"
-        setToDoList(currentList)
-        setToDoIndex(toDoIndex+1)
-    }
+    const [todoList, setTodoList] = useState([])
 
     return (
-    <div className="App">
-        <button className="addToDo" onClick={handleAddToDo}>
-            Add ToDo
-        </button>
-        <input type="text"></input>
-        <ul>
-            <ToDos toDoList={toDoList}/>
-        </ul>
-    </div>
+        <div className="appContainer">
+            <div className="appTitile">
+                <h1>ToDo List</h1>
+            </div>
+            <div className="app">
+                <AddTodo setTodoList={setTodoList} />
+                <TodoList todoList={todoList} setTodoList={setTodoList} />
+            </div>
+        </div>
+        
 );
 }
 
