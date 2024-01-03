@@ -8,10 +8,10 @@ function App() {
 
     return (
         <div className="appContainer">
-            <div className="appTitile">
+            <div className="appTitile" style={{display: "flex", justifyContent: "center", alignItems: "center", marginTop: "50px"}}>
                 <h1>ToDo List</h1>
             </div>
-            <div className="app">
+            <div className="app" style={{display: "flex", justifyContent: "center", alignItems: "center"}}>
                 <AddTodo setTodoList={setTodoList} />
                 <TodoList todoList={todoList} setTodoList={setTodoList} />
             </div>

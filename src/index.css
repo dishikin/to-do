@@ -47,4 +47,8 @@ span {
     justify-content: center;
 }
 
-
+.appTitle{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
